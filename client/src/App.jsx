@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Form from './components/Form';
+import RequestTabs from './components/RequestTabs';
 
 function App() {
-    return <div className="text-center">Hello there</div>;
+    return (
+        <>
+            <Form />
+            <RequestTabs />
+        </>
+    );
 }
 
 export default App;
