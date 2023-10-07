@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
 import { Button } from 'flowbite-react';
 import axios from 'axios';
+import { useContext } from 'react';
+import { Context } from '../context/context';
 
 function Form() {
-    const [method, setMethod] = useState('GET');
-    const [url, setUrl] = useState('');
+    const { queryParams, headers, body, method, setMethod, url, setUrl } =
+        useContext(Context);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log({ method, url });
-        try {
-            const { data } = await axios.get(url);
-            console.log(data);
-        } catch (err) {
-            console.log(err);
-        }
+        const parsedBody = JSON.parse(body);
+        console.log({ method, url, queryParams, headers, parsedBody });
     };
 
     return (

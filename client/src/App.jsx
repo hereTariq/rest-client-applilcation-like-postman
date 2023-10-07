@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
 import Form from './components/Form';
 import RequestTabs from './components/RequestTabs';
+import ContextProvider from './context/context';
 
 function App() {
     return (
         <>
-            <Form />
-            <RequestTabs />
+            <ContextProvider>
+                <Form />
+                <RequestTabs />
+            </ContextProvider>
         </>
     );
 }
