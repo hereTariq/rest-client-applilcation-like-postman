@@ -6,8 +6,10 @@ const ContextProvider = ({ children }) => {
     const [method, setMethod] = useState('GET');
     const [url, setUrl] = useState('');
     const [queryParams, setQueryParams] = useState([{ key: '', value: '' }]);
-    const [headers, setHeaders] = useState([{ key: '', value: '' }]);
-    const [body, setBody] = useState('{\n\n}');
+    const [reqHeaders, setReqHeaders] = useState([{ key: '', value: '' }]);
+    const [reqBody, setReqBody] = useState('{\n\n}');
+    const [resBody, setResBody] = useState('');
+    const [resHeaders, setResHeaders] = useState([{ key: '', value: '' }]);
 
     return (
         <Context.Provider
@@ -18,10 +20,14 @@ const ContextProvider = ({ children }) => {
                 setUrl,
                 queryParams,
                 setQueryParams,
-                headers,
-                setHeaders,
-                body,
-                setBody,
+                reqHeaders,
+                setReqHeaders,
+                reqBody,
+                setReqBody,
+                resBody,
+                setResBody,
+                resHeaders,
+                setResHeaders,
             }}
         >
             {children}

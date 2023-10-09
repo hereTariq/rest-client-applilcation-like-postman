@@ -8,8 +8,15 @@ import './style.css';
 import { Tabs, Button } from 'flowbite-react';
 
 export default function RequestTabs() {
-    const { queryParams, setQueryParams, headers, setHeaders } =
-        useContext(Context);
+    const {
+        queryParams,
+        setQueryParams,
+        reqHeaders,
+        setReqHeaders,
+        reqBody,
+        setReqBody,
+        resBody,
+    } = useContext(Context);
 
     // add new inputs row to the param
     const handleAddQueryParam = (e) => {
@@ -18,7 +25,7 @@ export default function RequestTabs() {
 
     // add new inputs row to the header
     const handleAddHeaders = (e) => {
-        setHeaders([...headers, { key: '', value: '' }]);
+        setReqHeaders([...reqHeaders, { key: '', value: '' }]);
     };
 
     // handling the values in params
@@ -29,9 +36,9 @@ export default function RequestTabs() {
     };
     //handling the values in headers
     const handleHeadersChange = (index, field, value) => {
-        const updatedHeaders = [...headers];
+        const updatedHeaders = [...reqHeaders];
         updatedHeaders[index][field] = value;
-        setHeaders(updatedHeaders);
+        setReqHeaders(updatedHeaders);
     };
 
     // Initialize CodeMirror editor when the component mounts
@@ -75,7 +82,7 @@ export default function RequestTabs() {
                         >
                             Add
                         </Button>
-                        {headers.map((headers, index) => {
+                        {reqHeaders.map((headers, index) => {
                             return (
                                 <KeyValueInputs
                                     key={index}
@@ -90,7 +97,11 @@ export default function RequestTabs() {
                 <Tabs.Item title="Body">
                     <div className="space-y-4">
                         <p>JSON</p>
-                        <JSONEditor />
+                        <JSONEditor
+                            editable={true}
+                            body={reqBody}
+                            setBody={setReqBody}
+                        />
                     </div>
                 </Tabs.Item>
             </Tabs.Group>

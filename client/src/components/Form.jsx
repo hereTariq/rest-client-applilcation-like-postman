@@ -2,15 +2,53 @@ import { Button } from 'flowbite-react';
 import axios from 'axios';
 import { useContext } from 'react';
 import { Context } from '../context/context';
+import { convertToJSObject } from '../helpers/convertToJSObject';
 
 function Form() {
-    const { queryParams, headers, body, method, setMethod, url, setUrl } =
-        useContext(Context);
+    const {
+        queryParams,
+        reqHeaders,
+        reqBody,
+        method,
+        setMethod,
+        url,
+        setUrl,
+        resBody,
+        setResBody,
+    } = useContext(Context);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const parsedBody = JSON.parse(body);
-        console.log({ method, url, queryParams, headers, parsedBody });
+        let parsedBody;
+        try {
+            parsedBody = JSON.parse(reqBody);
+        } catch (err) {
+            console.log(err.message);
+            return alert('please enter valid json');
+        }
+        let params = convertToJSObject(queryParams);
+        let headersObj = convertToJSObject(reqHeaders);
+        console.log({
+            method,
+            url,
+            params,
+            headersObj,
+            parsedBody,
+        });
+        try {
+            const { data } = await axios({
+                url,
+                method,
+                params,
+                headers: headersObj,
+                data: parsedBody,
+            });
+            setResBody(JSON.stringify(data, null, 4));
+
+            console.log(data);
+        } catch (err) {
+            return console.log(err);
+        }
     };
 
     return (

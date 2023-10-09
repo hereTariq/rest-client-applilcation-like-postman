@@ -1,10 +1,9 @@
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { json } from '@codemirror/lang-json';
-import { useContext } from 'react';
-import { Context } from '../context/context';
-function JSONEditor() {
-    const { body, setBody } = useContext(Context);
+import { indentOnInput } from '@codemirror/language';
+
+function JSONEditor({ editable, body, setBody }) {
     const onChange = React.useCallback((val, viewUpdate) => {
         setBody(val);
     }, []);
@@ -12,10 +11,23 @@ function JSONEditor() {
     return (
         <CodeMirror
             value={body}
-            height="200px"
+            height="180px"
             width="600px"
-            extensions={[json()]}
+            extensions={[json(), indentOnInput()]}
+            // editable={editable}
+
             onChange={onChange}
+            basicSetup={{
+                lineNumbers: true,
+                bracketMatching: true,
+                closeBrackets: true,
+                indentOnInput: true,
+                syntaxHighlighting: true,
+                highlightSelectionMatches: true,
+                tabSize: 4,
+
+                defaultCharacterWidth: 5,
+            }}
         />
     );
 }
