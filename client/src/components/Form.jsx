@@ -30,7 +30,7 @@ function Form() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex items-center">
+        <form onSubmit={handleSubmit} className="flex">
             <select
                 className=" p-2 bg-gray-100 border border-gray-300 rounded-l-md focus:outline-none"
                 value={method}
@@ -45,7 +45,7 @@ function Form() {
 
             <input
                 type="url"
-                className="w-full max-w-md p-2 bg-gray-100 border border-gray-300 focus:outline-none"
+                className="w-full p-2 bg-gray-100 border border-gray-300 focus:outline-none"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="Enter request url"

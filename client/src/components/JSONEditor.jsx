@@ -10,8 +10,8 @@ function JSONEditor({ editable, body, setBody }) {
     return (
         <CodeMirror
             value={body}
-            // height="180px"
-            // width="600px"
+            height="200px"
+            width="600px"
             extensions={[json()]}
             editable={editable}
             onChange={onChange}
@@ -22,9 +22,8 @@ function JSONEditor({ editable, body, setBody }) {
                 closeBrackets: true,
                 syntaxHighlighting: true,
                 highlightSelectionMatches: true,
-                highlightActiveLine: editable,
-                highlightActiveLineGutter: editable,
-
+                highlightActiveLine: false,
+                highlightActiveLineGutter: false,
                 tabSize: 4,
             }}
         />

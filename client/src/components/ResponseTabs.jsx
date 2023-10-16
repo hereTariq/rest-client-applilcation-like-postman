@@ -7,15 +7,8 @@ import JSONEditor from './JSONEditor';
 function ResponseTabs() {
     const { resBody } = useContext(Context);
     return (
-        <div className="flex flex-col space-y-4">
-            <div className="flex space-x-6 ">
-                <p>Status: {resBody?.status}</p>
-                <p>Time: {resBody?.time}</p>
-                <p>Size: {resBody?.size}</p>
-            </div>
-            <main className="border">
-                {/* <h2 className="font-semibold text-xl ">Response</h2> */}
-
+        <main className="border flex mt-6 w-full">
+            <div className="w-[70%]">
                 <Tabs.Group style="underline" className="">
                     <Tabs.Item active title="Response">
                         <div className="flex flex-col gap-4">
@@ -26,7 +19,7 @@ function ResponseTabs() {
                         </div>
                     </Tabs.Item>
                     <Tabs.Item title="Headers">
-                        <div className="overflow-x-auto">
+                        <div className="">
                             <table className="min-w-full">
                                 <thead>
                                     <tr>
@@ -52,8 +45,13 @@ function ResponseTabs() {
                         </div>
                     </Tabs.Item>
                 </Tabs.Group>
-            </main>
-        </div>
+            </div>
+            <div className="flex space-x-6 mt-[13px] text-sm w-full text-gray-400">
+                <p>Status: {resBody?.status}</p>
+                <p>Time: {resBody?.time}</p>
+                <p>Size: {resBody?.size}</p>
+            </div>
+        </main>
     );
 }
 

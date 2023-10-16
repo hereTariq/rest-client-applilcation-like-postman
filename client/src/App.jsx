@@ -7,15 +7,11 @@ function App() {
     return (
         <>
             <ContextProvider>
-                <Form />
-                <main className="lg:flex gap-8">
-                    <div className="lg:w-[50%] min-w-[50%]">
-                        <RequestTabs />
-                    </div>
-                    <div className="lg:w-[50%] min-w-[50%]">
-                        <ResponseTabs />
-                    </div>
-                </main>
+                <div className="h-screen overflow-hidden">
+                    <Form className="flex-grow" />
+                    <RequestTabs className="h-1/4 overflow-auto" />
+                    <ResponseTabs className="h-3/4 overflow-auto" />
+                </div>
             </ContextProvider>
         </>
     );
