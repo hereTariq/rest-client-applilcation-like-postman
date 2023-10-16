@@ -1,54 +1,32 @@
 import { Button } from 'flowbite-react';
-import axios from 'axios';
 import { useContext } from 'react';
 import { Context } from '../context/context';
-import { convertToJSObject } from '../helpers/convertToJSObject';
+import makeRequest from '../helpers/makeRequest';
 
 function Form() {
     const {
+        url,
+        method,
         queryParams,
         reqHeaders,
-        reqBody,
-        method,
         setMethod,
-        url,
         setUrl,
-        resBody,
         setResBody,
+        reqBody,
     } = useContext(Context);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let parsedBody;
-        try {
-            parsedBody = JSON.parse(reqBody);
-        } catch (err) {
-            console.log(err.message);
-            return alert('please enter valid json');
-        }
-        let params = convertToJSObject(queryParams);
-        let headersObj = convertToJSObject(reqHeaders);
-        console.log({
-            method,
-            url,
-            params,
-            headersObj,
-            parsedBody,
-        });
-        try {
-            const { data } = await axios({
-                url,
-                method,
-                params,
-                headers: headersObj,
-                data: parsedBody,
-            });
-            setResBody(JSON.stringify(data, null, 4));
 
-            console.log(data);
-        } catch (err) {
-            return console.log(err);
-        }
+        const response = await makeRequest(
+            url,
+            method,
+            queryParams,
+            reqHeaders,
+            reqBody
+        );
+        // console.log(response);
+        setResBody(response);
     };
 
     return (
@@ -67,7 +45,7 @@ function Form() {
 
             <input
                 type="url"
-                className="w-full p-2 bg-gray-100 border border-gray-300 focus:outline-none"
+                className="w-full max-w-md p-2 bg-gray-100 border border-gray-300 focus:outline-none"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="Enter request url"

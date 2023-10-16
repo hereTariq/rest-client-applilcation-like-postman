@@ -7,8 +7,8 @@ const ContextProvider = ({ children }) => {
     const [url, setUrl] = useState('');
     const [queryParams, setQueryParams] = useState([{ key: '', value: '' }]);
     const [reqHeaders, setReqHeaders] = useState([{ key: '', value: '' }]);
-    const [reqBody, setReqBody] = useState('{\n\n}');
-    const [resBody, setResBody] = useState('');
+    const [reqBody, setReqBody] = useState('{\n\t\n}');
+    const [resBody, setResBody] = useState(null);
     const [resHeaders, setResHeaders] = useState([{ key: '', value: '' }]);
 
     return (

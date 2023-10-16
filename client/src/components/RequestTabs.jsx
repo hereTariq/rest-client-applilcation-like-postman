@@ -41,8 +41,6 @@ export default function RequestTabs() {
         setReqHeaders(updatedHeaders);
     };
 
-    // Initialize CodeMirror editor when the component mounts
-
     return (
         <main>
             <Tabs.Group style="underline" className="">
